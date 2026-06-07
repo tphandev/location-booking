@@ -26,7 +26,9 @@ async function bootstrap() {
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('SJ Group — Building Location & Booking API')
-    .setDescription('RESTful API for managing building locations and room bookings')
+    .setDescription(
+      'RESTful API for managing building locations and room bookings',
+    )
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -39,4 +41,4 @@ async function bootstrap() {
   console.log(`Application running on http://localhost:${port}`);
   console.log(`Swagger docs at http://localhost:${port}/api/docs`);
 }
-bootstrap();
+void bootstrap();

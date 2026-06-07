@@ -5,6 +5,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import * as Joi from 'joi';
 
 import { AppController } from './app.controller';
+import { AuthModule } from './auth/auth.module';
+import { LocationsModule } from './locations/locations.module';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
 
@@ -46,6 +48,9 @@ import jwtConfig from './config/jwt.config';
         logging: config.get('NODE_ENV') === 'development',
       }),
     }),
+
+    AuthModule,
+    LocationsModule,
 
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
