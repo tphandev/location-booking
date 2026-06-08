@@ -132,7 +132,7 @@ The `openTime` column stores operating schedule as JSON. Two variants:
 ### Day values
 `"Mon"` | `"Tue"` | `"Wed"` | `"Thu"` | `"Fri"` | `"Sat"` | `"Sun"`
 
-### Examples from the assignment
+### Examples
 
 | Room | openTime JSON |
 |------|--------------|

@@ -1,6 +1,6 @@
-# SJ Group — Building Location & Booking API
+# Location & Booking API
 
-RESTful API for managing building locations and room bookings, built as a Surbana Jurong interview assignment.
+RESTful API for managing building locations and room bookings.
 
 ## Tech Stack
 
@@ -26,7 +26,7 @@ RESTful API for managing building locations and room bookings, built as a Surban
 
 ```bash
 git clone <repo-url>
-cd sjgroup-assigment
+cd location-booking-api
 npm install
 ```
 
@@ -77,7 +77,7 @@ Swagger UI: `http://localhost:3000/api/docs`
 | `DB_PORT` | `5432` | PostgreSQL port |
 | `DB_USERNAME` | `postgres` | PostgreSQL user |
 | `DB_PASSWORD` | `postgres` | PostgreSQL password |
-| `DB_NAME` | `sjgroup` | PostgreSQL database name |
+| `DB_NAME` | `location_booking` | PostgreSQL database name |
 | `JWT_SECRET` | *(required)* | Signing secret — min 16 chars |
 | `JWT_EXPIRES_IN` | `7d` | Token expiry |
 | `THROTTLE_TTL` | `60000` | Rate-limit window in ms |
@@ -91,11 +91,11 @@ All seeded accounts use password **`Password123!`**
 
 | Username | Email | Department | Role |
 |----------|-------|------------|------|
-| `admin` | admin@sjgroup.com | EFM | **admin** |
-| `efm_user` | efm@sjgroup.com | EFM | user |
-| `fss_user` | fss@sjgroup.com | FSS | user |
-| `avs_user` | avs@sjgroup.com | AVS | user |
-| `ass_user` | ass@sjgroup.com | ASS | user |
+| `admin` | admin@example.com | EFM | **admin** |
+| `efm_user` | efm@example.com | EFM | user |
+| `fss_user` | fss@example.com | FSS | user |
+| `avs_user` | avs@example.com | AVS | user |
+| `ass_user` | ass@example.com | ASS | user |
 
 ### Bookable rooms (seeded)
 

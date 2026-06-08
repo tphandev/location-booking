@@ -53,7 +53,7 @@ async function seed() {
 
   await upsertUser(userRepo, {
     username: 'admin',
-    email: 'admin@sjgroup.com',
+    email: 'admin@example.com',
     password: PASS,
     department: 'EFM',
     role: Role.Admin,
@@ -61,7 +61,7 @@ async function seed() {
 
   await upsertUser(userRepo, {
     username: 'efm_user',
-    email: 'efm@sjgroup.com',
+    email: 'efm@example.com',
     password: PASS,
     department: 'EFM',
     role: Role.User,
@@ -69,7 +69,7 @@ async function seed() {
 
   await upsertUser(userRepo, {
     username: 'fss_user',
-    email: 'fss@sjgroup.com',
+    email: 'fss@example.com',
     password: PASS,
     department: 'FSS',
     role: Role.User,
@@ -77,7 +77,7 @@ async function seed() {
 
   await upsertUser(userRepo, {
     username: 'avs_user',
-    email: 'avs@sjgroup.com',
+    email: 'avs@example.com',
     password: PASS,
     department: 'AVS',
     role: Role.User,
@@ -85,7 +85,7 @@ async function seed() {
 
   await upsertUser(userRepo, {
     username: 'ass_user',
-    email: 'ass@sjgroup.com',
+    email: 'ass@example.com',
     password: PASS,
     department: 'ASS',
     role: Role.User,
@@ -252,11 +252,11 @@ async function seed() {
   ┌─────────────┬──────────────────────────┬────────┬────────┐
   │ Username    │ Email                    │ Dept   │ Role   │
   ├─────────────┼──────────────────────────┼────────┼────────┤
-  │ admin       │ admin@sjgroup.com        │ EFM    │ admin  │
-  │ efm_user    │ efm@sjgroup.com          │ EFM    │ user   │
-  │ fss_user    │ fss@sjgroup.com          │ FSS    │ user   │
-  │ avs_user    │ avs@sjgroup.com          │ AVS    │ user   │
-  │ ass_user    │ ass@sjgroup.com          │ ASS    │ user   │
+  │ admin       │ admin@example.com        │ EFM    │ admin  │
+  │ efm_user    │ efm@example.com          │ EFM    │ user   │
+  │ fss_user    │ fss@example.com          │ FSS    │ user   │
+  │ avs_user    │ avs@example.com          │ AVS    │ user   │
+  │ ass_user    │ ass@example.com          │ ASS    │ user   │
   └─────────────┴──────────────────────────┴────────┴────────┘
 
   Bookable rooms:

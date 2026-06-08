@@ -25,7 +25,7 @@ async function bootstrap() {
   );
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('SJ Group — Building Location & Booking API')
+    .setTitle('Location & Booking API')
     .setDescription(
       'RESTful API for managing building locations and room bookings',
     )

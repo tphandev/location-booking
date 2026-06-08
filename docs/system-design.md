@@ -136,8 +136,8 @@ All endpoints are prefixed with `/api/v1`.
 
 | Decision | Choice | Reason |
 |----------|--------|--------|
-| Framework | NestJS | Required by assignment. Module-based architecture maps cleanly to domain boundaries. DI container simplifies testing. |
-| ORM | TypeORM | Required by assignment. Decorator-based entities, migration support, repository pattern. |
+| Framework | NestJS | Module-based architecture maps cleanly to domain boundaries. DI container simplifies testing. |
+| ORM | TypeORM | Decorator-based entities, migration support, repository pattern. |
 | Tree storage | Adjacency list (`parentId` FK) | Simple to query, easy to understand. Recursive service method handles tree building and cascade deletes in application layer — avoids complex DB-level recursive CTEs for this scale. |
 | Soft delete | `deletedAt` timestamp | Preserves audit history. Cascade implemented in service: on delete, recursively fetch all descendant IDs, bulk-set `deletedAt`. |
 | openTime storage | JSONB column | Flexible schema for `scheduled` vs `always` types without extra tables. Queried only at validation time, not for indexing. |
