@@ -6,6 +6,7 @@ import * as Joi from 'joi';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
+import { BookingsModule } from './bookings/bookings.module';
 import { LocationsModule } from './locations/locations.module';
 import databaseConfig from './config/database.config';
 import jwtConfig from './config/jwt.config';
@@ -51,6 +52,7 @@ import jwtConfig from './config/jwt.config';
 
     AuthModule,
     LocationsModule,
+    BookingsModule,
 
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
