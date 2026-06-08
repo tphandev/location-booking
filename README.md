@@ -1,98 +1,221 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# SJ Group — Building Location & Booking API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+RESTful API for managing building locations and room bookings, built as a Surbana Jurong interview assignment.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tech Stack
 
-## Description
+| Layer | Choice |
+|-------|--------|
+| Framework | NestJS + TypeScript |
+| ORM | TypeORM |
+| Database | PostgreSQL 15 |
+| Auth | JWT (Bearer) + bcrypt |
+| Validation | class-validator + ValidationPipe |
+| Docs | Swagger / OpenAPI 3 |
+| Container | Docker Compose |
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## Quick Start
+
+### Prerequisites
+- Docker Desktop (for PostgreSQL)
+- Node.js 20+
+
+### 1 — Clone & install
 
 ```bash
-$ npm install
+git clone <repo-url>
+cd sjgroup-assigment
+npm install
 ```
 
-## Compile and run the project
+### 2 — Configure environment
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+cp .env.example .env
+# Edit .env if needed — defaults work with the Docker Compose setup
 ```
 
-## Run tests
+### 3 — Start PostgreSQL
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+docker compose up postgres -d
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 4 — Run migrations
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run migration:run
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 5 — Seed data
 
-## Resources
+```bash
+npm run seed
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 6 — Start the API
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+npm run start:dev
+```
 
-## Support
+The API is now available at `http://localhost:3000/api/v1`.  
+Swagger UI: `http://localhost:3000/api/docs`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## Environment Variables
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `NODE_ENV` | `development` | `development` / `production` / `test` |
+| `PORT` | `3000` | HTTP port |
+| `API_PREFIX` | `api/v1` | Global route prefix |
+| `DB_HOST` | `localhost` | PostgreSQL host |
+| `DB_PORT` | `5432` | PostgreSQL port |
+| `DB_USERNAME` | `postgres` | PostgreSQL user |
+| `DB_PASSWORD` | `postgres` | PostgreSQL password |
+| `DB_NAME` | `sjgroup` | PostgreSQL database name |
+| `JWT_SECRET` | *(required)* | Signing secret — min 16 chars |
+| `JWT_EXPIRES_IN` | `7d` | Token expiry |
+| `THROTTLE_TTL` | `60000` | Rate-limit window in ms |
+| `THROTTLE_LIMIT` | `100` | Max requests per window |
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Test Credentials
+
+All seeded accounts use password **`Password123!`**
+
+| Username | Email | Department | Role |
+|----------|-------|------------|------|
+| `admin` | admin@sjgroup.com | EFM | **admin** |
+| `efm_user` | efm@sjgroup.com | EFM | user |
+| `fss_user` | fss@sjgroup.com | FSS | user |
+| `avs_user` | avs@sjgroup.com | AVS | user |
+| `ass_user` | ass@sjgroup.com | ASS | user |
+
+### Bookable rooms (seeded)
+
+| Location # | Name | Dept | Capacity | Schedule |
+|------------|------|------|----------|----------|
+| A-01-01 | Meeting Room 1 | EFM | 10 | Mon–Fri 09:00–18:00 UTC |
+| A-01-02 | Meeting Room 2 | AVS | 8 | Mon–Sat 09:00–18:00 UTC |
+| A-02-01 | Meeting Room 3 | FSS | 6 | Mon–Fri 09:00–18:00 UTC |
+| A-02-02 | Meeting Room 4 | EFM | 12 | Mon–Fri 09:00–18:00 UTC |
+| B-05-11 | Utility Room | ASS | 4 | Always open |
+| B-05-13 | Genset Room | ASS | 2 | Mon–Sun 09:00–18:00 UTC |
+
+---
+
+## API Endpoints
+
+All routes are prefixed with `/api/v1`. All except `POST /auth/register` and `POST /auth/login` require a `Bearer` token.
+
+### Auth
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| POST | `/auth/register` | — | Register a new user |
+| POST | `/auth/login` | — | Login → `{ access_token }` |
+| GET | `/auth/me` | User | Current user info |
+
+### Locations
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| GET | `/locations` | User | Paginated flat list (`?building=A&page=1&limit=20`) |
+| GET | `/locations/tree` | User | Full nested tree |
+| GET | `/locations/:id` | User | Single location with children |
+| POST | `/locations` | **Admin** | Create a location |
+| PATCH | `/locations/:id` | **Admin** | Update a location |
+| DELETE | `/locations/:id` | **Admin** | Soft-delete location + all descendants |
+
+### Bookings
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| GET | `/bookings` | User | Own bookings (admin sees all) |
+| GET | `/bookings/:id` | User | Own booking (admin sees any) |
+| POST | `/bookings` | User | Create booking (5-rule validation) |
+| PATCH | `/bookings/:id` | User | Update own booking (re-validates) |
+| DELETE | `/bookings/:id` | User | Cancel own booking (soft-delete) |
+
+### Booking Validation Rules
+
+Every `POST /bookings` and `PATCH /bookings/:id` runs these checks in order:
+
+1. Location exists, is not deleted, and has `department` + `capacity` + `openTime` set
+2. `user.department` matches `location.department`
+3. `attendees` ≤ `location.capacity`
+4. Booking day and time fall within the location's open schedule (UTC); start and end must be on the same calendar day
+5. No overlapping active booking exists for that location
+
+---
+
+## Running Tests
+
+```bash
+# Unit tests
+npm run test
+
+# Unit tests with coverage
+npm run test:cov
+
+# E2E tests (uses in-memory pg-mem — no Docker needed)
+npm run test:e2e
+
+# E2E tests against real PostgreSQL
+npm run test:e2e:db
+```
+
+---
+
+## Database Migrations
+
+```bash
+# Apply all pending migrations
+npm run migration:run
+
+# Revert the last migration
+npm run migration:revert
+
+# Show migration status
+npm run migration:show
+
+# Generate a new migration from entity changes
+npm run migration:generate -- src/database/migrations/<MigrationName>
+```
+
+---
+
+## Design Documentation
+
+- [System Design](docs/system-design.md) — architecture diagram, module breakdown, request lifecycle, booking validation flow
+- [Database Design](docs/database-design.md) — ERD, full table definitions, `openTime` JSONB schema, index strategy
+
+---
+
+## Project Structure
+
+```
+src/
+├── auth/               # JWT auth, guards, decorators
+├── bookings/           # Booking CRUD + 5-rule validator
+│   ├── dto/
+│   ├── entities/
+│   └── booking-validator.service.ts
+├── common/
+│   ├── enums/
+│   ├── filters/        # AllExceptionsFilter
+│   ├── interceptors/   # LoggingInterceptor, TransformInterceptor
+│   └── interfaces/
+├── config/             # database.config, jwt.config
+├── database/
+│   ├── migrations/
+│   └── seeds/          # npm run seed
+├── locations/          # Location CRUD + tree + cascade delete
+└── users/              # UsersService (internal)
+```
