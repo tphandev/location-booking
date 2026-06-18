@@ -22,9 +22,9 @@ describe('LocationsService.update circular reference checks', () => {
   it('rejects a location being its own parent', async () => {
     repo.findOne.mockResolvedValueOnce({ id: 'A', locationNumber: 'A' });
 
-    await expect(
-      service.update('A', { parentId: 'A' } as any),
-    ).rejects.toThrow(BadRequestException);
+    await expect(service.update('A', { parentId: 'A' })).rejects.toThrow(
+      BadRequestException,
+    );
   });
 
   it('rejects moving a location under its own descendant', async () => {
@@ -35,9 +35,9 @@ describe('LocationsService.update circular reference checks', () => {
       .mockResolvedValueOnce([{ id: 'B' }]) // collectDescendants('A') children
       .mockResolvedValueOnce([]); // collectDescendants('B') children
 
-    await expect(
-      service.update('A', { parentId: 'B' } as any),
-    ).rejects.toThrow('Cannot move a location under one of its own descendants');
+    await expect(service.update('A', { parentId: 'B' })).rejects.toThrow(
+      'Cannot move a location under one of its own descendants',
+    );
   });
 
   it('allows a valid non-cyclic parent reassignment', async () => {
@@ -47,8 +47,6 @@ describe('LocationsService.update circular reference checks', () => {
     repo.find.mockResolvedValue([]); // no descendants
     repo.save.mockResolvedValueOnce({ id: 'A', parentId: 'C' });
 
-    await expect(
-      service.update('A', { parentId: 'C' } as any),
-    ).resolves.toBeDefined();
+    await expect(service.update('A', { parentId: 'C' })).resolves.toBeDefined();
   });
 });
