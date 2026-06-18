@@ -142,6 +142,13 @@ export class LocationsService {
             `Parent location ${dto.parentId} not found`,
           );
         }
+
+        const descendantIds = await this.collectDescendants(id);
+        if (descendantIds.includes(dto.parentId)) {
+          throw new BadRequestException(
+            'Cannot move a location under one of its own descendants',
+          );
+        }
       }
     }
 
