@@ -1,25 +1,51 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
+  IsIn,
   IsInt,
-  IsObject,
   IsOptional,
   IsString,
   IsUUID,
   Length,
   Max,
   Min,
+  ValidateNested,
 } from 'class-validator';
-import { DayOfWeek } from '../../common/interfaces/open-time.interface';
+import type { DayOfWeek } from '../../common/interfaces/open-time.interface';
+
+const DAYS_OF_WEEK: DayOfWeek[] = [
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat',
+  'Sun',
+];
 
 export class OpenTimeScheduledDto {
+  @IsIn(['scheduled'])
   type: 'scheduled';
+
+  @IsIn(DAYS_OF_WEEK)
   daysFrom: DayOfWeek;
+
+  @IsIn(DAYS_OF_WEEK)
   daysTo: DayOfWeek;
+
+  @IsInt()
+  @Min(0)
+  @Max(23)
   openHour: number;
+
+  @IsInt()
+  @Min(0)
+  @Max(23)
   closeHour: number;
 }
 
 export class OpenTimeAlwaysDto {
+  @IsIn(['always'])
   type: 'always';
 }
 
@@ -66,7 +92,17 @@ export class CreateLocationDto {
       closeHour: 18,
     },
   })
-  @IsObject()
   @IsOptional()
+  @ValidateNested()
+  @Type(() => Object, {
+    discriminator: {
+      property: 'type',
+      subTypes: [
+        { value: OpenTimeScheduledDto, name: 'scheduled' },
+        { value: OpenTimeAlwaysDto, name: 'always' },
+      ],
+    },
+    keepDiscriminatorProperty: true,
+  })
   openTime?: OpenTimeScheduledDto | OpenTimeAlwaysDto;
 }
